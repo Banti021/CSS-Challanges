@@ -1,0 +1,15 @@
+body {
+    background-color: hsl(234, 29%, 20%);
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}
+
+#title{
+    color: hsl(234, 29%, 20%);
+}
+.subtitle{
+    color: hsl(235, 18%, 26%);
+}
+.button{
+    background-color: hsl(235, 18%, 26%) !important;
+}
