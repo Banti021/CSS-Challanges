@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CSS challenges</title>
+</head>
+<body>
+<script>
+    // Array containing the names of subdirectories
+    var subdirectories = ["tailwind-newsletter-sign-up-with-success-message-main/index.html"];
+    // Function to create and add <a> elements
+    function addLinksToSubdirectories() {
+        var mainDir = window.location.href;
+        var mainDirParts = mainDir.split("/");
+        var baseUrl = mainDirParts.slice(0, mainDirParts.length - 1).join("/");
+
+        var linkContainer = document.body; // Change this if you want the links in a different container
+
+        // Loop through subdirectories array and create links
+        for (var i = 0; i < subdirectories.length; i++) {
+            var subDir = subdirectories[i];
+            var link = document.createElement("a");
+            link.href = baseUrl + "/" + subDir; // Set the href attribute to the appropriate subdirectory
+            link.innerText = "Link to " + subDir; // Set the link text (you can customize this)
+
+            // Append the link to the container
+            linkContainer.appendChild(link);
+            linkContainer.appendChild(document.createElement("br")); // Optional: Add line breaks between links
+        }
+    }
+
+    // Call the function to add the links when the page loads
+    addLinksToSubdirectories();
+</script>
+</body>
+</html>
