@@ -8,9 +8,35 @@
     <title>CSS challenges</title>
 </head>
 <body>
+<style>
+    .link-button {
+        display: inline-block;
+        text-decoration: none;
+        width: fit-content;
+        font-size: 16px;
+        font-weight: 600;
+        padding: 20px;
+        color: #fff;
+        cursor: pointer;
+        margin: 20px;
+        height: fit-content;
+        text-align:center;
+        border: none;
+        background-size: 300% 100%;
+        border-radius: 50px;
+        moz-transition: all .4s ease-in-out;
+        -o-transition: all .4s ease-in-out;
+        -webkit-transition: all .4s ease-in-out;
+        transition: all .4s ease-in-out;
+        background-image: linear-gradient(to right, #29323c, #485563, #2b5876, #4e4376);
+        box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
+    }
+</style>
 <script>
     // Array containing the names of subdirectories
-    var subdirectories = ["tailwind-newsletter-sign-up-with-success-message-main/index.html"];
+    var subdirectories = ["tailwind-newsletter-sign-up-with-success-message-main",
+        "tailwind-age-calculator-app-main"
+    ];
     // Function to create and add <a> elements
     function addLinksToSubdirectories() {
         var mainDir = window.location.href;
@@ -23,8 +49,10 @@
         for (var i = 0; i < subdirectories.length; i++) {
             var subDir = subdirectories[i];
             var link = document.createElement("a");
-            link.href = baseUrl + "/" + subDir; // Set the href attribute to the appropriate subdirectory
-            link.innerText = "Link to " + subDir; // Set the link text (you can customize this)
+            link.classList.add("link-button");
+            link.classList.add("link-button");
+            link.href = baseUrl + "/" + subDir + "/index.html"; // Set the href attribute to the appropriate subdirectory
+            link.innerText = subDir; // Set the link text (you can customize this)
 
             // Append the link to the container
             linkContainer.appendChild(link);
