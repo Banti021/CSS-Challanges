@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Age calculator app</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto:wght@400;700&family=Wix+Madefor+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./assets/style.css">
+</head>
+<body>
+  <div class="bg-white sm:m-3 lg:w-1/2 lg:mx-auto lg:my-10" style="border-radius: 20px 20px 500px 20px;">
+    <div class="px-20 py-10">
+      <div class="grid grid-cols-3 gap-10">
+        <div class="grid grid-rows-2">
+          <label class="">Day</label>
+          <input id="dayInput" class="border-2 border-gray-300 rounded w-full font-bold" placeholder="DD">
+        </div>
+        <div class="grid grid-rows-2">
+          <label>Months</label>
+          <input id="monthInput" class="border-2 border-gray-300 rounded w-full font-bold" placeholder="MM">
+        </div>
+        <div class="grid grid-rows-2">
+          <label>Years</label>
+          <input id="yearInput" class="border-2 border-gray-300 rounded w-full font-bold" placeholder="YYYY">
+        </div>
+      </div>
+      <div class="flex justify-content-center align-items-center m-5">
+        <hr class="h-px w-5/6 my-8 bg-gray-200 border-0 dark:bg-gray-700">
+        <div class="rounded-full bg-violet-600 p-2">
+          <img src="./assets/images/icon-arrow.svg" alt="">
+        </div>
+      </div>
+      <div>
+        <div class="flex justify-content-start">
+          <p id="yearsCounted" class="font-bold text-8xl me-5 text-violet-600">X</p>
+          <p class="font-bold text-8xl">years</p>
+        </div>
+        <div class="flex justify-content-start">
+          <p id="monthsCounted" class="font-bold text-8xl me-5 text-violet-600">X</p>
+          <p class="font-bold text-8xl">months</p>
+        </div>
+        <div class="flex justify-content-start">
+          <p id="daysCounted" class="font-bold text-8xl me-5 text-violet-600">X</p>
+          <p class="font-bold text-8xl">days</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Igor Lasota</a>.
+  </div>
+
+  <script>
+    var dayInput = document.getElementById("dayInput");
+    var monthInput = document.getElementById("monthInput");
+    var yearInput = document.getElementById("yearInput");
+
+    function checkInputValidity(){
+      if(dayInput.value != null || monthInput.value != null || yearInput.value != null){
+        age = calculateAge(dayInput.value, monthInput.value, yearInput.value);
+
+        yearsCounted.innerHTML = age['years'];
+        monthsCounted.innerHTML = age['months'];
+        daysCounted.innerHTML = age['days'];
+      }
+    }
+
+    function calculateAge(day, month, year) {
+      const currentDate = new Date();
+      const birthDate = new Date(year, month - 1, day); // JS months are 0-indexed
+      let ageYears = currentDate.getFullYear() - birthDate.getFullYear();
+      let ageMonths = currentDate.getMonth() - birthDate.getMonth();
+      let ageDays = currentDate.getDate() - birthDate.getDate();
+
+      if (ageDays < 0) {
+        ageMonths--;
+        ageDays += daysInMonth(birthDate.getMonth(), birthDate.getFullYear());
+      }
+
+      if (ageMonths < 0) {
+        ageYears--;
+        ageMonths += 12;
+      }
+
+      return {
+        years: ageYears,
+        months: ageMonths,
+        days: ageDays
+      };
+    }
+
+    function daysInMonth(month, year) {
+      return new Date(year, month + 1, 0).getDate();
+    }
+
+    dayInput.addEventListener('input', function() {
+      checkInputValidity();
+    });
+
+    monthInput.addEventListener('input', function() {
+      checkInputValidity();
+    });
+
+    yearInput.addEventListener('input', function() {
+      checkInputValidity();
+    });
+  </script>
+</body>
+</html>
